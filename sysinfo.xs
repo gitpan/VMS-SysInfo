@@ -1,6 +1,6 @@
 /* VMS::SysInfo - Get info for a VMS node
  *
- * Version: 0.01
+ * Version: 0.06
  * Author:  Dan Sugalski <sugalsd@lbcc.cc.or.us>
  * Revised: 26-August-1997
  *
@@ -101,8 +101,12 @@ struct SysInfoID SysInfoList[] =
   {"ACTIVE_CPU_MASK", SYI$_ACTIVE_CPU_MASK, 4, IS_LONGWORD, TRUE},
 #endif
   {"ARCHFLAG", SYI$_ARCHFLAG, 4, IS_BITMAP, FALSE},
+#ifdef SYI$_ARCH_NAME
   {"ARCH_NAME", SYI$_ARCH_NAME, 15, IS_STRING, FALSE},
+#endif
+#ifdef SYI$_ARCH_TYPE
   {"ARCH_TYPE", SYI$_ARCH_TYPE, 4, IS_ENUM, FALSE},
+#endif
   {"AVAILCPU_CNT", SYI$_AVAILCPU_CNT, 4, IS_LONGWORD, TRUE},
 #ifdef SYI$_AVAIL_CPU_MASK
   {"AVAIL_CPU_MASK", SYI$_AVAIL_CPU_MASK, 4, IS_LONGWORD, TRUE},
@@ -118,30 +122,46 @@ struct SysInfoID SysInfoList[] =
   {"CLUSTER_VOTES", SYI$_CLUSTER_VOTES, 2, IS_WORD, FALSE},
   {"CONTIG_GBLPAGES", SYI$_CONTIG_GBLPAGES, 4, IS_LONGWORD, FALSE},
   {"CPU", SYI$_CPU, 4, IS_ENUM, TRUE},
+#ifdef SYI$_CPU_TYPE
   {"CPUTYPE", SYI$_CPUTYPE, 4, IS_ENUM, FALSE},
+#endif
   {"DECIMAL_EMULATED", SYI$_DECIMAL_EMULATED, 1, IS_BYTEBOOL, TRUE},
+#ifdef SYI$_DECNET_FULLNAME
   {"DECNET_FULLNAME", SYI$_DECNET_FULLNAME, 255, IS_STRING, FALSE},
+#endif
   {"D_FLOAT_EMULATED", SYI$_D_FLOAT_EMULATED, 1, IS_BYTEBOOL, TRUE},
+#ifdef SYI$_DEF_PRIO_MAX
   {"DEF_PRIO_MAX", SYI$_DEF_PRIO_MAX, 4, IS_LONGWORD, FALSE},
+#endif
+#ifdef SYI$_DEF_PRIO_MIN
   {"DEF_PRIO_MIN", SYI$_DEF_PRIO_MIN, 4, IS_LONGWORD, FALSE},
+#endif
+#ifdef SYI$_ERLBUFFERPAGES
   {"ERLBUFFERPAGES", SYI$_ERLBUFFERPAGES, 4, IS_LONGWORD, FALSE},
+#endif
   {"ERRORLOGBUFFERS", SYI$_ERRORLOGBUFFERS, 2, IS_WORD, FALSE},
   {"F_FLOAT_EMULATED", SYI$_F_FLOAT_EMULATED, 1, IS_BYTEBOOL, TRUE},
   {"FREE_GBLPAGES", SYI$_FREE_GBLPAGES, 4, IS_LONGWORD, FALSE},
   {"FREE_GBLSECTS", SYI$_FREE_GBLSECTS, 4, IS_LONGWORD, FALSE},
   {"G_FLOAT_EMULATED", SYI$_G_FLOAT_EMULATED, 1, IS_BYTEBOOL, TRUE},
+#ifdef SYI$_GH_RSRVPGCNT
   {"GH_RSRVPGCNT", SYI$_GH_RSRVPGCNT, 4, IS_LONGWORD, FALSE},
+#endif
   {"H_FLOAT_EMULATED", SYI$_H_FLOAT_EMULATED, 1, IS_BYTEBOOL, TRUE},
   {"HW_MODEL", SYI$_HW_MODEL, 2, IS_WORD, FALSE},
   {"HW_NAME", SYI$_HW_NAME, 31, IS_STRING, FALSE},
+#ifdef SYI$_ITB_ENTRIES
   {"ITB_ENTRIES", SYI$_ITB_ENTRIES, 4, IS_LONGWORD, FALSE},
+#endif
 #ifdef SYI$_MAX_CPUS
   {"MAX_CPUS", SYI$_MAX_CPUS, 4, IS_LONGWORD, TRUE},
 #endif
 #ifdef SYI$_MAX_PFN
   {"MAX_PFN", SYI$_MAX_PFN, 4, IS_LONGWORD, FALSE},
 #endif
+#ifdef SYI$_MEMSIZE
   {"MEMSIZE", SYI$_MEMSIZE, 4, IS_LONGWORD, FALSE},
+#endif
   {"NODE_AREA", SYI$_NODE_AREA, 4, IS_LONGWORD, FALSE},
   {"NODE_CSID", SYI$_NODE_CSID, 4, IS_LONGWORD, FALSE},
   {"NODE_EVOTES", SYI$_NODE_EVOTES, 2, IS_WORD, FALSE},
@@ -156,7 +176,9 @@ struct SysInfoID SysInfoList[] =
   {"NODENAME", SYI$_NODENAME, 15, IS_STRING, FALSE},
   {"PAGEFILE_FREE", SYI$_PAGEFILE_FREE, 4, IS_LONGWORD, TRUE},
   {"PAGEFILE_PAGE", SYI$_PAGEFILE_PAGE, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_PAGE_SIZE
   {"PAGE_SIZE", SYI$_PAGE_SIZE, 4, IS_LONGWORD, FALSE},
+#endif
   {"PHYSICALPAGES", SYI$_PHYSICALPAGES, 4, IS_LONGWORD, FALSE},
 #ifdef SYI$_PMD_COUNT
   {"PMD_COUNT", SYI$_PMD_COUNT, 4, IS_LONGWORD, FALSE},
@@ -167,17 +189,27 @@ struct SysInfoID SysInfoList[] =
 #ifdef SYI$_PROCESS_SPACE_LIMIT
   {"PROCESS_SPACE_LIMIT", SYI$_PROCESS_SPACE_LIMIT, 8, IS_QUADWORD, FALSE},
 #endif
+#ifdef SYI$_PSXFIFO_PRIO_MAX
   {"PSXFIFO_PRIO_MAX", SYI$_PSXFIFO_PRIO_MAX, 4, IS_LONGWORD, FALSE},
+#endif
+#ifdef SYI$_PSXFIFO_PRIO_MIN
   {"PSXFIFO_PRIO_MIN", SYI$_PSXFIFO_PRIO_MIN, 4, IS_LONGWORD, FALSE},
+#endif
+#ifdef SYI$_PSXRR_PRIO_MAX
   {"PSXRR_PRIO_MAX", SYI$_PSXRR_PRIO_MAX, 4, IS_LONGWORD, FALSE},
+#endif
+#ifdef SYI$_PSXRR_PRIO_MIN
   {"PSXRR_PRIO_MIN", SYI$_PSXRR_PRIO_MIN, 4, IS_LONGWORD, FALSE},
+#endif
 #ifdef SYI$_PT_BASE
   {"PT_BASE", SYI$_PT_BASE, 8, IS_QUADWORD, FALSE},
 #endif
 #ifdef SYI$_PTES_PER_PAGE
   {"PTES_PER_PAGE", SYI$_PTES_PER_PAGE, 4, IS_LONGWORD, TRUE},
 #endif
+#ifdef SYI$_REAL_CPUTYPE
   {"REAL_CPUTYPE", SYI$_REAL_CPUTYPE, 4, IS_ENUM, FALSE},
+#endif
   {"SCS_EXISTS", SYI$_SCS_EXISTS, 4, IS_LONGWORD, FALSE},
 #ifdef SYI$_SHARED_VA_PTES
   {"SHARED_VA_PTES", SYI$_SHARED_VA_PTES, 8, IS_QUADWORD, FALSE},
@@ -189,9 +221,15 @@ struct SysInfoID SysInfoList[] =
   {"SYSTYPE", SYI$_SYSTYPE, 4, IS_ENUM, FALSE},
 #endif
   {"VERSION", SYI$_VERSION, 8, IS_STRING, TRUE},
+#ifdef SYI$_VECTOR_EMULATOR
   {"VECTOR_EMULATOR", SYI$_VECTOR_EMULATOR, 1, IS_BYTEBOOL, FALSE},
+#endif
+#ifdef SYI$_VP_MASK
   {"VP_MASK", SYI$_VP_MASK, 4, IS_LONGWORD, FALSE},
+#endif
+#ifdef SYI$_VP_NUMBER
   {"VP_NUMBER", SYI$_VP_NUMBER, 4, IS_LONGWORD, FALSE},
+#endif
   {"XCPU", SYI$_XCPU, 4, IS_LONGWORD, TRUE},
   {"XSID", SYI$_XSID, 4, IS_LONGWORD, TRUE},
   {NULL, 0, 0, 0, 0}
@@ -237,7 +275,9 @@ struct SysParmID SysParmList[] =
 #ifdef SYI$_CLUSTER_CREDITS
   {"CLUSTER_CREDITS", SYI$_CLUSTER_CREDITS, 4, IS_LONGWORD, TRUE},
 #endif
+#ifdef SYI$_CONSOLE_VERSION
   {"CONSOLE_VERSION", SYI$_CONSOLE_VERSION, 20, IS_STRING, TRUE},
+#endif
   {"CTLIMGLIM", SYI$_CTLIMGLIM, 4, IS_LONGWORD, TRUE},
   {"CTLPAGES", SYI$_CTLPAGES, 4, IS_LONGWORD, TRUE},
   {"DLCKEXTRASTK", SYI$_DLCKEXTRASTK, 4, IS_LONGWORD, TRUE},
@@ -256,7 +296,9 @@ struct SysParmID SysParmList[] =
   {"IOTA", SYI$_IOTA, 4, IS_LONGWORD, TRUE},
   {"IRPCOUNT", SYI$_IRPCOUNT, 4, IS_LONGWORD, TRUE},
   {"IRPCOUNTV", SYI$_IRPCOUNTV, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_KSTACKPAGES
   {"KSTACKPAGES", SYI$_KSTACKPAGES, 4, IS_LONGWORD, TRUE},
+#endif
 #ifdef SYI$_MAIN_MEMORY
   {"MAIN_MEMORY", SYI$_MAIN_MEMORY, 4, IS_LONGWORD, TRUE},
 #endif
@@ -274,20 +316,26 @@ struct SysParmID SysParmList[] =
 #endif
   {"NPAGEVIR", SYI$_NPAGEVIR, 4, IS_LONGWORD, TRUE},
   {"PAGEDYN", SYI$_PAGEDYN, 4, IS_LONGWORD, TRUE},
-#ifdef SYI$_PAEGD_POOL
+#ifdef SYI$_PAGED_POOL
   {"PAGED_POOL", SYI$_PAGED_POOL, 4, IS_LONGWORD, TRUE},
 #endif
   {"PAGFILCNT", SYI$_PAGFILCNT, 4, IS_LONGWORD, TRUE},
   {"PAGTBLPFC", SYI$_PAGTBLPFC, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_PALCODE_VERSION
   {"PALCODE_VERSION", SYI$_PALCODE_VERSION, 20, IS_STRING, TRUE},
+#endif
   {"PFCDEFAULT", SYI$_PFCDEFAULT, 4, IS_LONGWORD, TRUE},
   {"PFRATH", SYI$_PFRATH, 4, IS_LONGWORD, TRUE},
   {"PFRATL", SYI$_PFRATL, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_PFRATL_SYS
   {"PFRATL_SYS", SYI$_PFRATL_SYS, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_PHYSICAL_MEMORY
 #ifdef __VAX
   {"PHYSICAL_MEMORY", SYI$_PHYSICAL_MEMORY, 4, IS_LONGWORD, TRUE},
 #else
   {"PHYSICAL_MEMORY", SYI$_PHYSICAL_MEMORY, 8, IS_QUADWORD, TRUE},
+#endif
 #endif
   {"PIOPAGES", SYI$_PIOPAGES, 4, IS_LONGWORD, TRUE},
   {"PIXSCAN", SYI$_PIXSCAN, 4, IS_LONGWORD, TRUE},
@@ -308,10 +356,18 @@ struct SysParmID SysParmList[] =
   {"SWPFILCNT", SYI$_SWPFILCNT, 4, IS_LONGWORD, TRUE},
   {"SYSMWCNT", SYI$_SYSMWCNT, 4, IS_LONGWORD, TRUE},
   {"SYSPFC", SYI$_SYSPFC, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_USED_GBLPAGCNT
   {"USED_GBLPAGCNT", SYI$_USED_GBLPAGCNT, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_USED_GBLPAGMAX
   {"USED_GBLPAGMAX", SYI$_USED_GBLPAGMAX, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_USED_GBLSECTCNT
   {"USED_GBLSECTCNT", SYI$_USED_GBLSECTCNT, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_USED_GBLSECTMAX
   {"USED_GBLSECTMAX", SYI$_USED_GBLSECTMAX, 4, IS_LONGWORD, TRUE},
+#endif
 #ifdef __VAX
   {"VIRTUALPAGECNT", SYI$_VIRTUALPAGECNT, 4, IS_LONGWORD, TRUE},
 #else
@@ -332,7 +388,9 @@ struct SysParmID SysParmList[] =
 #ifdef SYI$_CWCREPRC_ENABLE
   {"CWCREPRC_ENABLE", SYI$_CWCREPRC_ENABLE, 4, IS_LONGWORD, TRUE},
 #endif
+#ifdef SYI$_DBGTK_SCRATCH
   {"DBGTK_SCRATCH", SYI$_DBGTK_SCRATCH, 4, IS_LONGWORD, TRUE},
+#endif
   {"DEADLOCK_WAIT", SYI$_DEADLOCK_WAIT, 4, IS_LONGWORD, TRUE},
   {"DEFMBXBUFQUO", SYI$_DEFMBXBUFQUO, 4, IS_LONGWORD, TRUE},
   {"DEFMBXMXMSG", SYI$_DEFMBXMXMSG, 4, IS_LONGWORD, TRUE},
@@ -343,21 +401,41 @@ struct SysParmID SysParmList[] =
 #endif
   {"DISK_QUORUM", SYI$_DISK_QUORUM, 4, IS_LONGWORD, TRUE},
   {"DORMANTWAIT", SYI$_DORMANTWAIT, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_DR_UNIT_BASE
   {"DR_UNIT_BASE", SYI$_DR_UNIT_BASE, 4, IS_LONGWORD, TRUE},
+#endif
   {"DUMPBUG", SYI$_DUMPBUG, 4, IS_LONGWORD, TRUE},
   {"DUMPSTYLE", SYI$_DUMPSTYLE, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_ERLBUFFERPAGES
   {"ERLBUFFERPAGES", SYI$_ERLBUFFERPAGES, 4, IS_LONGWORD, TRUE},
+#endif
   {"ERRORLOGBUFFERS", SYI$_ERRORLOGBUFFERS, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_GH_EXEC_CODE
   {"GH_EXEC_CODE", SYI$_GH_EXEC_CODE, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_GH_EXEC_DATA
   {"GH_EXEC_DATA", SYI$_GH_EXEC_DATA, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_GH_RES_CODE
   {"GH_RES_CODE", SYI$_GH_RES_CODE, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_GH_RES_DATA
   {"GH_RES_DATA", SYI$_GH_RES_DATA, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_GH_RSRVPGCNT
   {"GH_RSRVPGCNT", SYI$_GH_RSRVPGCNT, 4, IS_LONGWORD, TRUE},
+#endif
   {"GROWLIM", SYI$_GROWLIM, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_IEEE_ADDRESS
   {"IEEE_ADDRESS", SYI$_IEEE_ADDRESS, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_IEEE_ADDRESSH
   {"IEEE_ADDRESSH", SYI$_IEEE_ADDRESSH, 4, IS_LONGWORD, TRUE},
+#endif
   {"IJOBLIM", SYI$_IJOBLIM, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_IMGREG_PAGES
   {"IMGREG_PAGES", SYI$_IMGREG_PAGES, 4, IS_LONGWORD, TRUE},
+#endif
 #ifdef SYI$_IO_PREFER_CPUS
   {"IO_PREFER_CPUS", SYI$_IO_PREFER_CPUS, 4, IS_LONGWORD, TRUE},
 #endif
@@ -369,30 +447,56 @@ struct SysParmID SysParmList[] =
   {"LGI_BRK_LIM", SYI$_LGI_BRK_LIM, 4, IS_LONGWORD, TRUE},
   {"LGI_BRK_TERM", SYI$_LGI_BRK_TERM, 4, IS_LONGWORD, TRUE},
   {"LGI_BRK_TMO", SYI$_LGI_BRK_TMO, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_LGI_CALLOUTS
   {"LGI_CALLOUTS", SYI$_LGI_CALLOUTS, 4, IS_LONGWORD, TRUE},
+#endif
   {"LGI_HID_TIM", SYI$_LGI_HID_TIM, 4, IS_LONGWORD, TRUE},
   {"LGI_PWD_TMO", SYI$_LGI_PWD_TMO, 4, IS_LONGWORD, TRUE},
   {"LGI_RETRY_LIM", SYI$_LGI_RETRY_LIM, 4, IS_LONGWORD, TRUE},
   {"LGI_RETRY_TMO", SYI$_LGI_RETRY_TMO, 4, IS_LONGWORD, TRUE},
   {"LNMPHASHTBL", SYI$_LNMPHASHTBL, 4, IS_LONGWORD, TRUE},
   {"LNMSHASHTBL", SYI$_LNMSHASHTBL, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_LOAD_PWD_POLICY
   {"LOAD_PWD_POLICY", SYI$_LOAD_PWD_POLICY, 4, IS_LONGWORD, TRUE},
+#endif
   {"LOCKDIRWT", SYI$_LOCKDIRWT, 4, IS_LONGWORD, TRUE},
   {"LOCKIDTBL", SYI$_LOCKIDTBL, 4, IS_LONGWORD, TRUE},
   {"LONGWAIT", SYI$_LONGWAIT, 4, IS_LONGWORD, TRUE},
   {"MAXQUEPRI", SYI$_MAXQUEPRI, 4, IS_LONGWORD, TRUE},
   {"MAXSYSGROUP", SYI$_MAXSYSGROUP, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_MC_SERVICES_P0
   {"MC_SERVICES_P0", SYI$_MC_SERVICES_P0, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P1
   {"MC_SERVICES_P1", SYI$_MC_SERVICES_P1, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P2
   {"MC_SERVICES_P2", SYI$_MC_SERVICES_P2, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P3
   {"MC_SERVICES_P3", SYI$_MC_SERVICES_P3, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P4
   {"MC_SERVICES_P4", SYI$_MC_SERVICES_P4, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P5
   {"MC_SERVICES_P5", SYI$_MC_SERVICES_P5, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P6
   {"MC_SERVICES_P6", SYI$_MC_SERVICES_P6, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P7
   {"MC_SERVICES_P7", SYI$_MC_SERVICES_P7, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P8
   {"MC_SERVICES_P8", SYI$_MC_SERVICES_P8, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P9
   {"MC_SERVICES_P9", SYI$_MC_SERVICES_P9, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MMG_CTLFLAGS
   {"MMG_CTLFLAGS", SYI$_MMG_CTLFLAGS, 4, IS_LONGWORD, TRUE},
+#endif
   {"MPW_IOLIMIT", SYI$_MPW_IOLIMIT, 4, IS_LONGWORD, TRUE},
   {"MPW_LOWAITLIMIT", SYI$_MPW_LOWAITLIMIT, 4, IS_LONGWORD, TRUE},
   {"MPW_THRESH", SYI$_MPW_THRESH, 4, IS_LONGWORD, TRUE},
@@ -410,11 +514,17 @@ struct SysParmID SysParmList[] =
   {"MULTITHREAD", SYI$_MULTITHREAD, 4, IS_LONGWORD, TRUE},
 #endif
   {"MVTIMEOUT", SYI$_MVTIMEOUT, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_NET_CALLOUTS
   {"NET_CALLOUTS", SYI$_NET_CALLOUTS, 4, IS_LONGWORD, TRUE},
+#endif
   {"NISCS_CONV_BOOT", SYI$_NISCS_CONV_BOOT, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_NISCS_LAN_OVRHD
   {"NISCS_LAN_OVRHD", SYI$_NISCS_LAN_OVRHD, 4, IS_LONGWORD, TRUE},
+#endif
   {"NISCS_LOAD_PEA0", SYI$_NISCS_LOAD_PEA0, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_NISCS_MAX_PKTSZ
   {"NISCS_MAX_PKTSZ", SYI$_NISCS_MAX_PKTSZ, 4, IS_LONGWORD, TRUE},
+#endif
   {"NISCS_PORT_SERV", SYI$_NISCS_PORT_SERV, 4, IS_LONGWORD, TRUE},
   {"NJOBLIM", SYI$_NJOBLIM, 4, IS_LONGWORD, TRUE},
 #ifdef SYI$_NPAG_AGGRESSIVE
@@ -501,31 +611,59 @@ struct SysParmID SysParmList[] =
   {"SCSRESPCNT", SYI$_SCSRESPCNT, 4, IS_LONGWORD, TRUE},
   {"SCSSYSTEMID", SYI$_SCSSYSTEMID, 4, IS_LONGWORD, TRUE},
   {"SCSSYSTEMIDH", SYI$_SCSSYSTEMIDH, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_SECURITY_POLICY
   {"SECURITY_POLICY", SYI$_SECURITY_POLICY, 4, IS_LONGWORD, TRUE},
+#endif
   {"SETTIME", SYI$_SETTIME, 4, IS_LONGWORD, TRUE},
   {"SHADOWING", SYI$_SHADOWING, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_SHADOW_MAX_COPY
   {"SHADOW_MAX_COPY", SYI$_SHADOW_MAX_COPY, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_SHADOW_MBR_TMO
   {"SHADOW_MBR_TMO", SYI$_SHADOW_MBR_TMO, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_SHADOW_REMOVE_1
   {"SHADOW_REMOVE_1", SYI$_SHADOW_REMOVE_1, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_SHADOW_REMOVE_2
   {"SHADOW_REMOVE_2", SYI$_SHADOW_REMOVE_2, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_SHADOW_SYS_DISK
   {"SHADOW_SYS_DISK", SYI$_SHADOW_SYS_DISK, 4, IS_LONGWORD, TRUE},
-  {"SHADOS_SYS_TMO", SYI$_SHADOW_SYS_TMO, 4, IS_LONGWORD, TRUE},
-  {"SHADOS_SYS_UNIT", SYI$_SHADOW_SYS_UNIT, 4, IS_LONGWORD, TRUE},
-  {"SHADOS_SYS_WAIT", SYI$_SHADOW_SYS_WAIT, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_SHADOW_SYS_TMO
+  {"SHADOW_SYS_TMO", SYI$_SHADOW_SYS_TMO, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_SHADOW_SYS_UNIT
+  {"SHADOW_SYS_UNIT", SYI$_SHADOW_SYS_UNIT, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_SHADOW_SYS_WAIT
+  {"SHADOW_SYS_WAIT", SYI$_SHADOW_SYS_WAIT, 4, IS_LONGWORD, TRUE},
+#endif
   {"SMP_CPUS", SYI$_SMP_CPUS, 4, IS_LONGWORD, TRUE},
   {"SMP_LNGSPINWAIT", SYI$_SMP_LNGSPINWAIT, 4, IS_LONGWORD, TRUE},
   {"SMP_SANITY_CNT", SYI$_SMP_SANITY_CNT, 4, IS_LONGWORD, TRUE},
   {"SMP_SPINWAIT", SYI$_SMP_SPINWAIT, 4, IS_LONGWORD, TRUE},
   {"SPTREQ", SYI$_SPTREQ, 4, IS_LONGWORD, TRUE},
   {"SWPOUTPGCNT", SYI$_SWPOUTPGCNT, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_SYSTEM_CHECK
   {"SYSTEM_CHECK", SYI$_SYSTEM_CHECK, 4, IS_LONGWORD, TRUE},
+#endif
   {"TAILORED", SYI$_TAILORED, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_TAPE_ALLOCLASS
   {"TAPE_ALLOCLASS", SYI$_TAPE_ALLOCLASS, 4, IS_LONGWORD, TRUE},
+#endif
   {"TAPE_MVTIMEOUT", SYI$_TAPE_MVTIMEOUT, 4, IS_LONGWORD, TRUE},
   {"TIMEPROMPTWAIT", SYI$_TIMEPROMPTWAIT, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_TIMVCFAIL
   {"TIMVCFAIL", SYI$_TIMVCFAIL, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_TMSCP_LOAD
   {"TMSCP_LOAD", SYI$_TMSCP_LOAD, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_TMSCP_SERVE_ALL
   {"TMSCP_SERVE_ALL", SYI$_TMSCP_SERVE_ALL, 4, IS_LONGWORD, TRUE},
+#endif
   {"TTY_ALTALARM", SYI$_TTY_ALTALARM, 4, IS_LONGWORD, TRUE},
   {"TTY_ALTYPAHD", SYI$_TTY_ALTYPAHD, 4, IS_LONGWORD, TRUE},
   {"TTY_AUTOCHAR", SYI$_TTY_AUTOCHAR, 4, IS_LONGWORD, TRUE},
@@ -550,37 +688,71 @@ struct SysParmID SysParmList[] =
   {"USER3", SYI$_USER3, 4, IS_LONGWORD, TRUE},
   {"USER4", SYI$_USER4, 4, IS_LONGWORD, TRUE},
   {"VAXCLUSTER", SYI$_VAXCLUSTER, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_VECTOR_MARGIN
   {"VECTOR_MARGIN", SYI$_VECTOR_MARGIN, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_VECTOR_PROC
   {"VECTOR_PROC", SYI$_VECTOR_PROC, 4, IS_LONGWORD, TRUE},
+#endif
   {"VOTES", SYI$_VOTES, 4, IS_LONGWORD, TRUE},
   {"WS_OPA0", SYI$_WS_OPA0, 4, IS_LONGWORD, TRUE},
   {"XFMAXRATE", SYI$_XFMAXRATE, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_ZERO_LIST_HI
   {"ZERO_LIST_HI", SYI$_ZERO_LIST_HI, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_AFFINITY_SKIP
   {"AFFINITY_SKIP", SYI$_AFFINITY_SKIP, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_AFFINITY_TIME
   {"AFFINITY_TIME", SYI$_AFFINITY_TIME, 4, IS_LONGWORD, TRUE},
+#endif
   {"BREAKPOINTS", SYI$_BREAKPOINTS, 4, IS_LONGWORD, TRUE},
   {"CLOCK_INTERVAL", SYI$_CLOCK_INTERVAL, 4, IS_LONGWORD, TRUE},
   {"CONCEAL_DEVICES", SYI$_CONCEAL_DEVICES, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_CRD_CONTROL
   {"CRD_CONTROL", SYI$_CRD_CONTROL, 4, IS_LONGWORD, TRUE},
+#endif
 #ifdef SYI$_DISABLE_UPCALLS
   {"DISABLE_UPCALLS", SYI$_DISABLE_UPCALLS, 4, IS_LONGWORD, TRUE},
 #endif
+#ifdef SYI$_DNVOSI1
   {"DNVOSI1", SYI$_DNVOSI1, 4, IS_LONGWORD, TRUE},
+#endif
   {"EXUSRSTK", SYI$_EXUSRSTK, 4, IS_LONGWORD, TRUE},
   {"JOBCTLD", SYI$_JOBCTLD, 4, IS_LONGWORD, TRUE},
   {"LOAD_SYS_IMAGES", SYI$_LOAD_SYS_IMAGES, 4, IS_LONGWORD, TRUE},
   {"LOCKRETRY", SYI$_LOCKRETRY, 4, IS_LONGWORD, TRUE},
   {"MAXCLASSPRI", SYI$_MAXCLASSPRI, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_MC_SERVICES_P0
   {"MC_SERVICES_P0", SYI$_MC_SERVICES_P0, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P1
   {"MC_SERVICES_P1", SYI$_MC_SERVICES_P1, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P2
   {"MC_SERVICES_P2", SYI$_MC_SERVICES_P2, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P3
   {"MC_SERVICES_P3", SYI$_MC_SERVICES_P3, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P4
   {"MC_SERVICES_P4", SYI$_MC_SERVICES_P4, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P5
   {"MC_SERVICES_P5", SYI$_MC_SERVICES_P5, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P6
   {"MC_SERVICES_P6", SYI$_MC_SERVICES_P6, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P7
   {"MC_SERVICES_P7", SYI$_MC_SERVICES_P7, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P8
   {"MC_SERVICES_P8", SYI$_MC_SERVICES_P8, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_MC_SERVICES_P9
   {"MC_SERVICES_P9", SYI$_MC_SERVICES_P9, 4, IS_LONGWORD, TRUE},
+#endif
   {"MINCLASSPRI", SYI$_MINCLASSPRI, 4, IS_LONGWORD, TRUE},
   {"MPW_PRIO", SYI$_MPW_PRIO, 4, IS_LONGWORD, TRUE},
   {"NOAUTOCONFIG", SYI$_NOAUTOCONFIG, 4, IS_LONGWORD, TRUE},
@@ -592,26 +764,40 @@ struct SysParmID SysParmList[] =
   {"PE4", SYI$_PE4, 4, IS_LONGWORD, TRUE},
   {"PE5", SYI$_PE5, 4, IS_LONGWORD, TRUE},
   {"PE6", SYI$_PE6, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_PFN_COLOR_COUNT
   {"PFN_COLOR_COUNT", SYI$_PFN_COLOR_COUNT, 4, IS_LONGWORD, TRUE},
+#endif
   {"POOLCHECK", SYI$_POOLCHECK, 4, IS_LONGWORD, TRUE},
   {"POOLPAGING", SYI$_POOLPAGING, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_PRIORITY_OFFSET
   {"PRIORITY_OFFSET", SYI$_PRIORITY_OFFSET, 4, IS_LONGWORD, TRUE},
+#endif
   {"PSUDOLOA", SYI$_PSEUDOLOA, 4, IS_LONGWORD, TRUE},
   {"PU_OPTIONS", SYI$_PU_OPTIONS, 4, IS_LONGWORD, TRUE},
   {"QBUS_MULT_INTR", SYI$_QBUS_MULT_INTR, 4, IS_LONGWORD, TRUE},
   {"RESALLOC", SYI$_RESALLOC, 4, IS_LONGWORD, TRUE},
   {"RSRVPAGCNT", SYI$_RSRVPAGCNT, 4, IS_LONGWORD, TRUE},
   {"S0_PAGING", SYI$_S0_PAGING, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_SA_APP
   {"SA_APP", SYI$_SA_APP, 4, IS_LONGWORD, TRUE},
+#endif
   {"SBIERRENABLE", SYI$_SBIERRENABLE, 4, IS_LONGWORD, TRUE},
   {"SCH_CTLFLAGS", SYI$_SCH_CTLFLAGS, 4, IS_LONGWORD, TRUE},
 #ifdef SYI$_SCSI_NOAUTO
   {"SCSI_NOAUTO", SYI$_SCSI_NOAUTO, 4, IS_LONGWORD, TRUE},
 #endif
+#ifdef SYI$_SCSICLUSTER_P1
   {"SCSICLUSTER_P1", SYI$_SCSICLUSTER_P1, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_SCSICLUSTER_P2
   {"SCSICLUSTER_P2", SYI$_SCSICLUSTER_P2, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_SCSICLUSTER_P3
   {"SCSICLUSTER_P3", SYI$_SCSICLUSTER_P3, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_SCSICLUSTER_P4
   {"SCSICLUSTER_P4", SYI$_SCSICLUSTER_P4, 4, IS_LONGWORD, TRUE},
+#endif
   {"SMP_CPUSH", SYI$_SMP_CPUSH, 4, IS_LONGWORD, TRUE},
   {"SMP_TICK_CNT", SYI$_SMP_TICK_CNT, 4, IS_LONGWORD, TRUE},
   {"SSINHIBIT", SYI$_SSINHIBIT, 4, IS_LONGWORD, TRUE},
@@ -630,8 +816,12 @@ struct SysParmID SysParmList[] =
 #ifdef SYI$_VBSS_ENABLE2
   {"VBSS_ENABLE2", SYI$_VBSS_ENABLE2, 4, IS_LONGWORD, TRUE},
 #endif
+#ifdef SYI$_VCC_FLAGS
   {"VCC_FLAGS", SYI$_VCC_FLAGS, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_VCC_MAXSIZE
   {"VCC_MAXSIZE", SYI$_VCC_MAXSIZE, 4, IS_LONGWORD, TRUE},
+#endif
 #ifdef SYI$_VCC_PTES
   {"VCC_PTES", SYI$_VCC_PTES, 4, IS_LONGWORD, TRUE},
 #endif
@@ -647,8 +837,12 @@ struct SysParmID SysParmList[] =
   {"WPTTE_SIZE", SYI$_WPTTE_SIZE, 4, IS_LONGWORD, TRUE},
   {"WRITABLESYS", SYI$_WRITABLESYS, 4, IS_LONGWORD, TRUE},
   {"WRITESYSPARAMS", SYI$_WRITESYSPARAMS, 4, IS_LONGWORD, TRUE},
+#ifdef SYI$_XQPCTL2
   {"XQPCTL2", SYI$_XQPCTL2, 4, IS_LONGWORD, TRUE},
+#endif
+#ifdef SYI$_XQPCTLD1
   {"XQPCTLD1", SYI$_XQPCTLD1, 4, IS_LONGWORD, TRUE},
+#endif
   {NULL, 0, 0, 0, 0}
 };
 
@@ -722,6 +916,7 @@ enum_name(long syi_entry, long val_to_deenum)
   SV *WorkingSV = newSV(10);
   char ErrorMessage[255];
   switch (syi_entry) {
+#ifdef SYI$_ARCH_TYPE
   case SYI$_ARCH_TYPE:
     switch(val_to_deenum) {
     case 1:
@@ -735,6 +930,7 @@ enum_name(long syi_entry, long val_to_deenum)
       break;
     }
     break;
+#endif
 #ifdef SYI$_SYSTYPE
   case SYI$_SYSTYPE:
     switch(val_to_deenum) {
@@ -753,6 +949,7 @@ enum_name(long syi_entry, long val_to_deenum)
     }
     break;
 #endif
+#ifdef SYI$_CPUTYPE
   case SYI$_CPUTYPE:
   case SYI$_REAL_CPUTYPE:
     switch(val_to_deenum) {
@@ -764,6 +961,7 @@ enum_name(long syi_entry, long val_to_deenum)
       break;
     }
     break;
+#endif
   case SYI$_CPU: 
     switch(val_to_deenum) {
     case PR$_SID_TYP730:
@@ -778,9 +976,11 @@ enum_name(long syi_entry, long val_to_deenum)
     case PR$_SID_TYPUV2:
       sv_setpv(WorkingSV, "VAXstation II, II/GPX, or MicroVAX II");
       break;
+#ifdef PR$_SID_TYP_NOTAVAX
     case PR$_SID_TYP_NOTAVAX:
       sv_setpv(WorkingSV, "Not a VAX");
       break;
+#endif
     default:
       sv_setpv(WorkingSV, "Unknown VAX");
       break;
@@ -840,7 +1040,9 @@ get_one_sys_info_item(infoname, NodeName="")
   unsigned short ReturnWordBuffer;     /* Return buffer for words */
   unsigned long ReturnLongWordBuffer;  /* Return buffer for longwords */
   unsigned short BufferLength;
+#ifdef __ALPHA
   unsigned __int64 ReturnQuadWordBuffer;
+#endif
   int status;
   unsigned short ReturnedTime[7];
   char AsciiTime[100];
@@ -854,7 +1056,7 @@ get_one_sys_info_item(infoname, NodeName="")
   if (!*LocalNodeName) {
     set_local_node_name();
   }
-
+  
   /* Are we local? */
   if ((!*NodeName) || !strcmp(NodeName, LocalNodeName))
     LocalNode = TRUE;
@@ -866,7 +1068,7 @@ get_one_sys_info_item(infoname, NodeName="")
       break;
     }
   }
-
+  
   /* Did we find a match? If not, complain and exit */
   if (SysInfoList[i].SysInfoName == NULL) {
     warn("Invalid sys info item");
@@ -915,13 +1117,14 @@ get_one_sys_info_item(infoname, NodeName="")
         
         /* Done */
         break;
-        
+      #ifdef __ALPHA  
       case IS_QUADWORD:
         /* Fill in the item list */
         init_itemlist(&OneItem[0], SysInfoList[i].BufferLen,
                       SysInfoList[i].SYIValue, &ReturnQuadWordBuffer,
                       &BufferLength);
         break;
+      #endif
         
       case IS_WORD:
         /* Fill in the item list */
@@ -964,10 +1167,12 @@ get_one_sys_info_item(infoname, NodeName="")
           /* Give back the buffer */
           free(ReturnStringBuffer);
           break;
+        #ifdef __ALPHA
         case IS_QUADWORD:
           sprintf(QuadWordString, "%llu", ReturnQuadWordBuffer);
           ST(0) = sv_2mortal(newSVpv(QuadWordString, 0));
           break;
+        #endif
         case IS_VMSDATE:
           sys$numtim(ReturnedTime, ReturnStringBuffer);
           sprintf(AsciiTime, "%02hi-%s-%hi %02hi:%02hi:%02hi.%hi",
@@ -1021,7 +1226,9 @@ get_all_sys_info_items(NodeName="")
   long *TempLongPointer;
   short *TempWordPointer;
   char *TempBytePointer;
+#ifdef __ALPHA
   __int64 *TempQuadPointer;
+#endif
   FetchedItem *OurDataList;
   int i, status, TotalItemCount;
   HV *AllPurposeHV;
@@ -1160,6 +1367,7 @@ get_all_sys_info_items(NodeName="")
           hv_store(AllPurposeHV, OurDataList[i].ItemName,
                    strlen(OurDataList[i].ItemName), &sv_no, 0);
         break;
+      #ifdef __ALPHA
       case IS_QUADWORD:
         TempQuadPointer = OurDataList[i].ReturnBuffer;
         sprintf(QuadWordString, "%llu", *TempQuadPointer);
@@ -1167,7 +1375,7 @@ get_all_sys_info_items(NodeName="")
                  strlen(OurDataList[i].ItemName),
                  newSVpv(QuadWordString, 0), 0);
         break;
-        
+      #endif
       }
     }
     ST(0) = newRV_noinc((SV *) AllPurposeHV);
@@ -1251,7 +1459,9 @@ get_one_sys_parm_item(infoname)
   unsigned short ReturnWordBuffer;     /* Return buffer for words */
   unsigned long ReturnLongWordBuffer;  /* Return buffer for longwords */
   unsigned short BufferLength;
+#ifdef __ALPHA
   unsigned __int64 ReturnQuadWordBuffer;
+#endif
   int status;
   unsigned short ReturnedTime[7];
   char AsciiTime[100];
@@ -1291,13 +1501,15 @@ get_one_sys_parm_item(infoname)
       
       /* Done */
       break;
-      
+
+  #ifdef __ALPHA
     case IS_QUADWORD:
       /* Fill in the item list */
       init_itemlist(&OneItem[0], SysParmList[i].BufferLen,
                     SysParmList[i].SYIValue, &ReturnQuadWordBuffer,
                     &BufferLength);
       break;
+  #endif
       
     case IS_WORD:
       /* Fill in the item list */
@@ -1340,10 +1552,12 @@ get_one_sys_parm_item(infoname)
         /* Give back the buffer */
         free(ReturnStringBuffer);
         break;
+      #ifdef __ALPHA
       case IS_QUADWORD:
         sprintf(QuadWordString, "%llu", ReturnQuadWordBuffer);
         ST(0) = sv_2mortal(newSVpv(QuadWordString, 0));
         break;
+      #endif
       case IS_VMSDATE:
         sys$numtim(ReturnedTime, ReturnStringBuffer);
         sprintf(AsciiTime, "%02hi-%s-%hi %02hi:%02hi:%02hi.%hi",
@@ -1392,7 +1606,9 @@ get_all_sys_parm_items()
   long *TempLongPointer;
   short *TempWordPointer;
   char *TempBytePointer;
+#ifdef __ALPHA
   __int64 *TempQuadPointer;
+#endif
   FetchedItem *OurDataList;
   int i, status, TotalItemCount;
   HV *AllPurposeHV;
@@ -1496,6 +1712,7 @@ get_all_sys_parm_items()
           hv_store(AllPurposeHV, OurDataList[i].ItemName,
                    strlen(OurDataList[i].ItemName), &sv_no, 0);
         break;
+#ifdef __ALPHA
       case IS_QUADWORD:
         TempQuadPointer = OurDataList[i].ReturnBuffer;
         sprintf(QuadWordString, "%llu", *TempQuadPointer);
@@ -1503,6 +1720,7 @@ get_all_sys_parm_items()
                  strlen(OurDataList[i].ItemName),
                  newSVpv(QuadWordString, 0), 0);
         break;
+#endif
         
       }
     }

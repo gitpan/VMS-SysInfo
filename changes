@@ -20,3 +20,12 @@ Revision history for Perl extension VMS::SysInfo.
 0.05  Tue Sep 16 16:00:01 1997
     - Added in the SPECIAL parameters from Appendix J
     - Added a bunch of #ifdefs to make it compatible with VMS 6.2
+
+0.06  Thu Sep 18 16:00:02 1997
+    - Added in a bunch of changes to get it to work on a VMS 5.5-2 machine.
+      It still doesn't, but its much closer. (More patches as soon as I can
+      get more time)
+
+1.00  Mon Sep 29 11:51:00 1997
+    - Tested it on an OpenVMS Alpha cluster system. Works just fine, so
+      it goes in release

@@ -15,7 +15,7 @@ require DynaLoader;
                 &get_one_sys_info_item &decode_sys_info_bitmap
                 &sys_parm_names        &get_all_sys_parm_items
                 &get_one_sys_parm_item &decode_sys_parm_bitmap);
-$VERSION = '0.05';
+$VERSION = '1.00';
 
 bootstrap VMS::SysInfo $VERSION;
 
