@@ -1,0 +1,14 @@
+Revision history for Perl extension VMS::SysInfo.
+
+0.01  Tue Aug 26 16:46:40 1997
+    - Copied from VMS::ProcInfo.
+
+0.02  Fri Aug 29 09:09:14 1997
+    - Fixed a problem with the tied hash and object interface where they'd
+      always return info on the local node, but had the calling process'
+      PID (!) marked as the node name.
+    - Added support for getting system parameters with get_sys_parm
+      functions. They return info for the local node only, unfortunately.
+
+0.03  Thu Sep 04 09:09:14 1997
+    - Fixed a bug in the bit_test macro--bitwise and is &, not &&. D'oh!

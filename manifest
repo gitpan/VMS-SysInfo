@@ -1,0 +1,7 @@
+CHANGES
+Makefile.PL
+MANIFEST
+SysInfo.pm
+SysInfo.xs
+readme
+t/basic.t
