@@ -6,7 +6,8 @@ You may distribute under the terms of the Artistic License, as distributed
 with Perl.
 
 This module lets you retrieve most of the info available via the system
-service GETSYI, or the DCL lexical F$GETSYI.
+service GETSYI, or the DCL lexical F$GETSYI. It also allows retrieval of
+all the system parameters available from SYSGEN.
 
 perl Makefile.pl
 mms
@@ -19,8 +20,9 @@ mms install
 to install it. More info is in the POD documentation in the ProcInfo.PM file.
 
 VMS::SysInfo allows Perl programs to retrieve info about systems.  The
-information it returns is pretty much equivalent to DCL's F$GETSYI function.
+information it returns is pretty much equivalent to DCL's F$GETSYI
+function, or what SYSGEN provides.
 
 This module can't violate VMS system security in any way that DCL can't, so
 if you can see something with F$GETSYI, you can see it with VMS::SysInfo.
-If you can't in DCL, you can't here, either.
+If you can't in DCL or SYSGEN, you can't here, either.

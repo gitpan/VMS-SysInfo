@@ -15,7 +15,7 @@ require DynaLoader;
                 &get_one_sys_info_item &decode_sys_info_bitmap
                 &sys_parm_names        &get_all_sys_parm_items
                 &get_one_sys_parm_item &decode_sys_parm_bitmap);
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 bootstrap VMS::SysInfo $VERSION;
 
@@ -129,7 +129,8 @@ You can't get all system info for all nodes in the cluster. This is a VMS
 limitation.
 
 You can't get system parameter info for non-local cluster nodes. This is
-also a VMS limitation.
+also a VMS limitation. Hopefully one to be lifted later. (If you've got a
+VMS source license, send me e-mail and we'll talk.)
 
 You can't access system parameters via the tied hash or the object
 interface. This'll likely change later.

@@ -14,4 +14,9 @@ Revision history for Perl extension VMS::SysInfo.
     - Fixed a bug in the bit_test macro--bitwise and is &, not &&. D'oh!
 
 0.04  Tue Sep 16 10:14:20 1997
-    - Added a bunch more system parameters
+    - Added a bunch more system parameters. All of the non-SPECIAL ones
+      from Appendix J of the System Manager's manual, actually.
+
+0.05  Tue Sep 16 16:00:01 1997
+    - Added in the SPECIAL parameters from Appendix J
+    - Added a bunch of #ifdefs to make it compatible with VMS 6.2
